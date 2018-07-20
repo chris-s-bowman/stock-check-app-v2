@@ -52,30 +52,12 @@ for(var i = 0; i < bumpers.length; i++) {
   buttonDiv.classList.add("buttonDiv");
   label.appendChild(buttonDiv);
 
-  // var del = create("button");
-  // del.innerHTML = "DEL";
-  // del.setAttribute("type", "button");
-  // del.classList.add("del");
-  // buttonDiv.appendChild(del);
-  // deleteArr.push(del);
-
-  // var calc = create("button");
-  // calc.innerHTML = "Calculate";
-  // calc.setAttribute("type", "button");
-  // calc.classList.add("calc");
-  // buttonDiv.appendChild(calc);
-  // calculateArr.push(calc);
-
-  // var value = create("div");
-  // value.innerHTML = 0;
-  // value.classList.add("values");
-  // label.appendChild(value);
 }
 
 for(var i = 0; i < bumpers.length; i++) {
   bumperObject[i].label = labelArr[i];
   bumperObject[i].label.buttonDiv = buttonDiv;
-  // bumperObject[i].label.buttonDiv.calc = calculateArr[i]
+
   bumperObject[i].label.buttonDiv.del = deleteArr[i];
   bumperObject[i].label.value = valueArr[i];
   bumperObject[i].label.count = 0;
@@ -95,7 +77,7 @@ for(var i = 0; i < bumpers.length; i++) {
 }
 var buttonDivArr = Array.from(document.getElementsByClassName("buttonDiv"))
 buttonDivArr.forEach(el => {
-
+// creating delete and calculate buttons
   var del = create("button");
   del.innerHTML = "DEL";
   del.setAttribute("type", "button");
@@ -108,7 +90,6 @@ buttonDivArr.forEach(el => {
   calc.innerHTML = "Calculate";
   calc.setAttribute("type", "button");
   calc.classList.add("calc");
-  // buttonDiv.appendChild(calc);
   calculateArr.push(calc);
   el.appendChild(calc);
   el.parentElement.calcButton = calc
@@ -116,12 +97,14 @@ buttonDivArr.forEach(el => {
   var value = create("div");
   value.classList.add("values");
   el.parentElement.appendChild(value);
-
+// if statement -- if local storage doenst exist, set value to 0...
   if(localStorage.getItem(el.parentElement.htmlFor) === null) {
     value.innerHTML = 0;
   }
+// else -- use local storage for value
   else {
-    value.innerHTML = localStorage.getItem(el.parentElement.htmlFor)
+    value.innerHTML = localStorage.getItem(el.parentElement.htmlFor);
+    el.parentElement.count = value.innerHTML / el.parentElement.snp;
   }
 // Result is the backend number stored in the object
 calc.addEventListener("click", () => {
@@ -141,25 +124,34 @@ del.addEventListener("click", () => {
 })
 })
 
+var totalsDiv = $(".totals");
+// created totals and made them equal the values from above
 bumperObject.forEach(el => {
-  // console.log(el.label.deleteButton);
-  // console.log(el.label.calcButton);
-  // console.log(el.label.value);
 
-  el.label.calcButton.addEventListener("click", () => {
+  var totalsName = create("div")
+  totalsName.innerHTML = el.name;
+  totalsDiv.appendChild(totalsName);
+
+  var totalsValue = create("div");
+  if(localStorage.getItem(el.name) === undefined) {
+    totalsValue.innerHTML = 0;
+  }
+  else {
+    totalsValue.innerHTML = Number(localStorage.getItem(el.name));
+  }
+  totalsDiv.appendChild(totalsValue);
+  // for each calc button create another result element. This is used for localStorage
+    el.label.calcButton.addEventListener("click", () => {
     el.result = el.label.result;
-    localStorage.setItem(el.name, el.result)
-    // console.log(el);
+    localStorage.setItem(el.name, el.result);
+    totalsValue.innerHTML = el.result;
+
   });
   el.label.deleteButton.addEventListener("click", () => {
     localStorage.removeItem(el.name)
+    totalsValue.innerHTML = 0;
   })
 })
 
-var saveButton = $(".save");
-saveButton.addEventListener("click", () => {
-  for(var i = 0; i < bumperObject.length; i++){
-    localStorage.setItem(bumperObject[i].name, (bumperObject[i].result));
-    // console.log(bumperObject[i].label.result);
-  }
-});
+
+// TODO: add number input, add new div to store Result. number input - amount of bumpers. If positive number GREEN - if negative number RED & add a - in front. 
