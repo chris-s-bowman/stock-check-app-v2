@@ -17,6 +17,23 @@
     Chris Bowman
 </author>
 
+<preference name="orientation" value="portrait" />
+<preference name="SplashScreen" value="splash" />
+
+    <!-- Define app icon for each platform. -->
+    <platform name="android">
+      <icon src="res/android/icon.png" />
+      <icon src="res/android/ldpi.png" density="ldpi" />
+      <icon src="res/android/mdpi.png" density="mdpi" />
+      <icon src="res/android/hdpi.png" density="hdpi" />
+      <icon src="res/android/xhdpi.png" density="xhdpi" />
+    </platform>
+    <!-- Splash Screen -->
+    <splash src="splash.png" />
+    <splash src="res/android/splash-port-ldpi.png" platform="android" density="ldpi" />
+    <splash src="res/android/splash-port-mdpi.png" platform="android" density="mdpi" />
+    <splash src="res/android/splash-port-hdpi.png" platform="android" density="hdpi" />
+    <splash src="res/android/splash-port-xhdpi.png" platform="android" density="xhdpi" />
 
 
 
