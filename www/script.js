@@ -178,6 +178,7 @@ bumperObject.forEach(el => {
   var balance = create("div");
   balance.innerHTML = totalsValue.innerHTML - target.value;
   totalsDiv.appendChild(balance);
+  balance.classList.add("balanceNum")
   addRemoveColour(balance)
 
 // event listener listens for any change in the number input

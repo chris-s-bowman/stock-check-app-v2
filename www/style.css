@@ -64,10 +64,16 @@ label select {
   font-family: 'Open Sans', sans-serif;
   font-size: 20px;
   font-weight: 200;
+  background: #fafbfb;
 }
 
 label:active {
   background: transparent;
+}
+label,
+select,
+button {
+  color: #363b39;
 }
 
 .totalsDiv * {
@@ -80,6 +86,14 @@ label:active {
   text-align: center;
   font-size: 15px;
   font-weight: 200;
+  display: inline-block;
+}
+.totalsDiv input,
+.balance,
+.balanceNum {
+  display: inline-block;
+  margin-left: 15px;
+  margin-bottom: 15px;
 }
 
 .totals-value {

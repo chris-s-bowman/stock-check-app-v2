@@ -7,4 +7,11 @@
     <author>
     Chris Bowman
 </author>
+    <splash src="splash.png" />
+    <splash density="ldpi" platform="android" src="res/android/splash-port-ldpi.png" />
+    <splash density="mdpi" platform="android" src="res/android/splash-port-mdpi.png" />
+    <splash density="hdpi" platform="android" src="res/android/splash-port-hdpi.png" />
+    <splash density="xhdpi" platform="android" src="res/android/splash-port-xhdpi.png" />
+    <preference name="orientation" value="portrait" />
+    <preference name="SplashScreen" value="splash" />
 </widget>
