@@ -127,9 +127,10 @@ del.addEventListener("click", () => {
 var totalsDiv = $(".totals");
 // created totals and made them equal the values from above
 bumperObject.forEach(el => {
-
+// THIS IS ALL FOR THE TOTALS SECTION
   var totalsName = create("div")
   totalsName.innerHTML = el.name;
+  totalsName.classList.add("totals-part-name")
   totalsDiv.appendChild(totalsName);
 
   var totalsValue = create("div");
@@ -139,19 +140,65 @@ bumperObject.forEach(el => {
   else {
     totalsValue.innerHTML = Number(localStorage.getItem(el.name));
   }
+  totalsValue.classList.add("totals-value")
   totalsDiv.appendChild(totalsValue);
   // for each calc button create another result element. This is used for localStorage
+  // THIS IS ALL FOR THE CALC AND DELETE BUTTONS AGAIN
     el.label.calcButton.addEventListener("click", () => {
     el.result = el.label.result;
     localStorage.setItem(el.name, el.result);
     totalsValue.innerHTML = el.result;
+    balance.innerHTML = totalsValue.innerHTML - target.value;
 
+    addRemoveColour(balance)
   });
   el.label.deleteButton.addEventListener("click", () => {
     localStorage.removeItem(el.name)
     totalsValue.innerHTML = 0;
+    balance.innerHTML = totalsValue.innerHTML - target.value;
+    addRemoveColour(balance)
+  })
+  var targetSubTitle = create("h6");
+  targetSubTitle.innerHTML = "Enter a number to set target."
+  totalsDiv.appendChild(targetSubTitle);
+
+  var target = create("input");
+  target.setAttribute("type", "number");
+  totalsDiv.appendChild(target);
+  target.value = localStorage.getItem(el.name + "value")
+  // console.log(localStorage.getItem(el.name + "value"));
+  var balanceSubTitle = create("div");
+  balanceSubTitle.innerHTML = "Balance: ";
+  totalsDiv.appendChild(balanceSubTitle)
+
+  var balance = create("div");
+  balance.innerHTML = totalsValue.innerHTML - target.value;
+  totalsDiv.appendChild(balance);
+  addRemoveColour(balance)
+
+// event listener listens for any change in the number input
+  target.addEventListener("input", () => {
+    balance.innerHTML = totalsValue.innerHTML - target.value;
+    localStorage.setItem(el.name + "value", target.value);
+    addRemoveColour(balance)
   })
 })
+// this function adds and removes the colour from the balance number
+function addRemoveColour(balance) {
+  if(balance.innerHTML < 0) {
+    balance.classList.add("red");
+    balance.classList.remove("green");
+  }
+  else if (balance.innerHTML == 0) {
+    balance.classList.remove("red");
+    balance.classList.remove("green");
+  }
+  else if(balance.innerHTML > 0) {
+    balance.classList.add("green");
+    balance.classList.remove("red");
+  }
+}
+// totalsValue.innerHTML - target.value
 
 
-// TODO: add number input, add new div to store Result. number input - amount of bumpers. If positive number GREEN - if negative number RED & add a - in front. 
+// TODO: create DELETE ALL button
