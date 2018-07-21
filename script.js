@@ -201,4 +201,39 @@ function addRemoveColour(balance) {
 // totalsValue.innerHTML - target.value
 
 
+var scrollDownButton = $("#scrollDownButton");
+var scrollUpButton = $("#scrollUpButton");
+
+window.addEventListener("scroll", function() {
+  var elTar = document.getElementById('totals');
+  if (window.scrollY > (elTar.offsetTop + elTar.offsetHeight - 150)) {
+    scrollDownButton.classList.add("hide");
+    scrollUpButton.classList.remove("hide");
+  }
+  if (window.scrollY < (elTar.offsetTop + elTar.offsetHeight - 150)) {
+    scrollUpButton.classList.add("hide");
+    scrollDownButton.classList.remove("hide");
+  }
+});
+
+scrollDownButton.addEventListener("click", () => {
+  document.getElementById('totals').scrollIntoView({behavior: "smooth", block: "start", inline: "start"});
+});
+
+scrollUpButton.addEventListener("click", () => {
+  document.getElementById('top').scrollIntoView({behavior: "smooth", block: "start", inline: "start"});
+});
+
+
+var deleteAll = $(".deleteAll");
+deleteAll.addEventListener("click", () => {
+  var c = window.confirm("Are you sure you want to delete all?")
+  if(c){
+    localStorage.clear();
+    window.location.reload()
+  }
+  else{
+  }
+})
+
 // TODO: create DELETE ALL button

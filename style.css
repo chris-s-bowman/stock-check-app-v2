@@ -4,6 +4,48 @@
   padding: 0;
 }
 
+.deleteAll,
+.scrollButton {
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  border-radius: 50px;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  opacity: .5;
+  border: 1px solid black;
+  outline: none;
+}
+
+.deleteAll {
+  left: 30px;
+}
+
+i {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+}
+
+.down {
+  position: relative;
+  top: -3.5px;
+    transform: rotate(45deg);
+    transform: translate(200em);
+    -webkit-transform: rotate(45deg);
+}
+.up {
+  position: relative;
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+}
+
+.hide {
+  display: none;
+}
+
 .green {
   color: green;
 }
