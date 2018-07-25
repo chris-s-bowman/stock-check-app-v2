@@ -1,40 +1,31 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<widget xmlns   = "http://www.w3.org/ns/widgets"
-    xmlns:gap   = "http://phonegap.com/ns/1.0"
-    id          = "com.phonegap.bdau"
-    versionCode = "10"
-    version     = "1.0.0" >
-
-<!-- versionCode is optional and Android only -->
-
-<name>Stock Check App</name>
-
-<description>
-    Stock Check App
-</description>
-
-<author>
-    Chris Bowman
-</author>
-
-<preference name="orientation" value="portrait" />
-<preference name="SplashScreen" value="splash" />
-
-    <!-- Define app icon for each platform. -->
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.chrisbowman.stockcheckapp" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Stock Check App</name>
+    <description>
+        Stock Check App.
+    </description>
+    <author email="chris.stephen.bowman@googlemail.com"> Chris Bowman
+    </author>
+    <content src="index.html" />
+    <plugin name="cordova-plugin-whitelist" spec="1" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
     <platform name="android">
-      <icon src="res/android/icon.png" />
-      <icon src="res/android/ldpi.png" density="ldpi" />
-      <icon src="res/android/mdpi.png" density="mdpi" />
-      <icon src="res/android/hdpi.png" density="hdpi" />
-      <icon src="res/android/xhdpi.png" density="xhdpi" />
+        <allow-intent href="market:*" />
+        <icon src="res/android/icon.png" />
+        <icon density="ldpi" src="res/android/ldpi.png" />
+        <icon density="mdpi" src="res/android/mdpi.png" />
+        <icon density="hdpi" src="res/android/hdpi.png" />
     </platform>
-    <!-- Splash Screen -->
-    <splash src="splash.png" />
-    <splash src="res/android/splash-port-ldpi.png" platform="android" density="ldpi" />
-    <splash src="res/android/splash-port-mdpi.png" platform="android" density="mdpi" />
-    <splash src="res/android/splash-port-hdpi.png" platform="android" density="hdpi" />
-    <splash src="res/android/splash-port-xhdpi.png" platform="android" density="xhdpi" />
-
-
-
-    </widget>
+    <platform name="ios">
+        <allow-intent href="itms:*" />
+        <allow-intent href="itms-apps:*" />
+    </platform>
+    <plugin name="cordova-plugin-email-composer" spec="^0.8.15" />
+    <engine name="android" spec="^7.0.0" />
+</widget>
