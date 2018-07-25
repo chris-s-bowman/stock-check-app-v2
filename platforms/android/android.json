@@ -39,10 +39,10 @@
   },
   "installed_plugins": {
     "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "com.chrisbowman.stockcheckapp"
+      "PACKAGE_NAME": "com.chrisbowman.stockcheck"
     },
     "cordova-plugin-email-composer": {
-      "PACKAGE_NAME": "com.chrisbowman.stockcheckapp"
+      "PACKAGE_NAME": "com.chrisbowman.stockcheck"
     }
   },
   "dependent_plugins": {},

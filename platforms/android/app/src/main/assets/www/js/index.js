@@ -63,7 +63,7 @@ function create(el) {
   return document.createElement(el);
 }
 
-
+window.onload = () => {
 // array of bumper names EMAIL SECTION MUST BE CHANGED WHEN PARTS ARE ADDED AND REMOVED
 var bumpers = ["083 Front", "083 Low Grade Rear", "083 High Grade Rear", "B12P Front", "B12P Rear", "724 Front Upper", "724 Front Lower", "724 Rear Upper", "724 Rear Lower", "Nismo Rear", "GD1A GT Front", "GD1A Sport Front", "GD1A All Road Front", "GD1A GT/Sport Rear Upper", "GD1A All Road Rear", "GD1A Lower #1", "GD1A Twin Lower", "GD1A Sport Lower" ];
 
@@ -330,3 +330,4 @@ emailButton.addEventListener("click", () => {
 
   });
 })
+}
