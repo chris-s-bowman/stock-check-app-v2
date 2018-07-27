@@ -8,13 +8,24 @@ module.exports = [
       "cordova.plugins.email",
       "plugin.email"
     ]
+  },
+  {
+    "id": "cordova-pdf-generator.pdf",
+    "file": "plugins/cordova-pdf-generator/www/pdf.js",
+    "pluginId": "cordova-pdf-generator",
+    "clobbers": [
+      "cordova.plugins.pdf",
+      "pugin.pdf",
+      "pdf"
+    ]
   }
 ];
 module.exports.metadata = 
 // TOP OF METADATA
 {
   "cordova-plugin-whitelist": "1.3.3",
-  "cordova-plugin-email-composer": "0.8.15"
+  "cordova-plugin-email-composer": "0.8.15",
+  "cordova-pdf-generator": "2.0.4"
 };
 // BOTTOM OF METADATA
 });

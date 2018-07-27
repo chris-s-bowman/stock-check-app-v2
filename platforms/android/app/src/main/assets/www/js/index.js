@@ -311,13 +311,21 @@ if(mm<10) {
 }
 
 today = mm + '/' + dd + '/' + yyyy;
-
+ttoday = mm + '_' + dd + '_' + yyyy;
 var emailButton = $(".email");
 var addressInput = $(".address");
 if(localStorage.getItem('savedAddress') == undefined){}
 else{
   addressInput.value = localStorage.getItem('savedAddress')
 }
+
+var pdfButton = $(".pdfButton");
+
+pdfButton.addEventListener("click", () => {
+    createPDF();
+    alert("PDF Saved.")
+});
+
 emailButton.addEventListener("click", () => {
   localStorage.setItem('savedAddress', addressInput.value)
   cordova.plugins.email.open({
@@ -325,9 +333,21 @@ emailButton.addEventListener("click", () => {
       // cc:      'erika@mustermann.de',
       // bcc:     ['john@doe.com', 'jane@doe.com'],
       subject: 'Stock Check' + " " + today,
-      body:    '<h3>083 Front</h3><p>In Stock: ' + localStorage.getItem("083 Front") + ' ' + 'Balance: '+ (localStorage.getItem("083 Front") - localStorage.getItem("083 Frontvalue") ) + '</p>' + "<br>" + '<h3>083 Low Grade Rear</h3><p>In Stock: ' + localStorage.getItem("083 Low Grade Rear") + ' ' + 'Balance: '+ (localStorage.getItem("083 Low Grade Rear") - localStorage.getItem("083 Low Grade Rearvalue") ) + '</p>' +"<br>" +'<h3>083 High Grade Rear</h3><p>In Stock: ' + localStorage.getItem("083 High Grade Rear") + ' ' + 'Balance: '+ (localStorage.getItem("083 High Grade Rear") - localStorage.getItem("083 High Grade Rearvalue") ) + '</p>' +"<br>" +'<h3>B12P Front</h3><p>In Stock: ' + localStorage.getItem("B12P Front") + ' ' + 'Balance: '+ (localStorage.getItem("B12P Front") - localStorage.getItem("B12P Frontvalue") ) + '</p>'+"<br>" +'<h3>B12P Rear</h3><p>In Stock: ' + localStorage.getItem("B12P Rear") + ' ' + 'Balance: '+ (localStorage.getItem("B12P Rear") - localStorage.getItem("B12P Rearvalue") ) + '</p>'+"<br>" +'<h3>724 Front Upper</h3><p>In Stock: ' + localStorage.getItem("724 Front Upper") + ' ' + 'Balance: '+ (localStorage.getItem("724 Front Upper") - localStorage.getItem("724 Front Uppervalue") ) + '</p>'+"<br>" +'<h3>724 Front Lower</h3><p>In Stock: ' + localStorage.getItem("724 Front Lower") + ' ' + 'Balance: '+ (localStorage.getItem("724 Front Lower") - localStorage.getItem("724 Front Lowervalue") ) + '</p>'+"<br>" +'<h3>724 Rear Upper</h3><p>In Stock: ' + localStorage.getItem("724 Rear Upper") + ' ' + 'Balance: '+ (localStorage.getItem("724 Rear Upper") - localStorage.getItem("724 Rear Uppervalue") ) + '</p>'+"<br>" +'<h3>724 Rear Lower</h3><p>In Stock: ' + localStorage.getItem("724 Rear Lower") + ' ' + 'Balance: '+ (localStorage.getItem("724 Rear Lower") - localStorage.getItem("724 Rear Lowervalue") ) + '</p>'+"<br>" +'<h3>Nismo Rear</h3><p>In Stock: ' + localStorage.getItem("Nismo Rear") + ' ' + 'Balance: '+ (localStorage.getItem("Nismo Rear") - localStorage.getItem("Nismo Rearvalue") ) + '</p>'+"<br>" +'<h3>GD1A GT Front</h3><p>In Stock: ' + localStorage.getItem("GD1A GT Front") + ' ' + 'Balance: '+ (localStorage.getItem("GD1A GT Front") - localStorage.getItem("GD1A GT Frontvalue") ) + '</p>'+"<br>" +'<h3>GD1A Sport Front</h3><p>In Stock: ' + localStorage.getItem("GD1A Sport Front") + ' ' + 'Balance: '+ (localStorage.getItem("GD1A Sport Front") - localStorage.getItem("GD1A Sport Frontvalue") ) + '</p>'+"<br>" +'<h3>GD1A All Road Front</h3><p>In Stock: ' + localStorage.getItem("GD1A All Road Front") + ' ' + 'Balance: '+ (localStorage.getItem("GD1A All Road Front") - localStorage.getItem("GD1A All Road Frontvalue") ) + '</p>'+"<br>" +'<h3>GD1A GT/Sport Rear Upper</h3><p>In Stock: ' + localStorage.getItem("GD1A GT/Sport Rear Upper") + ' ' + 'Balance: '+ (localStorage.getItem("GD1A GT/Sport Rear Upper") - localStorage.getItem("GD1A GT/Sport Rear Uppervalue") ) + '</p>'+"<br>" +'<h3>GD1A All Road Rear</h3><p>In Stock: ' + localStorage.getItem("GD1A All Road Rear") + ' ' + 'Balance: '+ (localStorage.getItem("GD1A All Road Rear") - localStorage.getItem("GD1A All Road Rearvalue") ) + '</p>'+"<br>" +'<h3>GD1A Lower #1</h3><p>In Stock: ' + localStorage.getItem("GD1A Lower #1") + ' ' + 'Balance: '+ (localStorage.getItem("GD1A Lower #1") - localStorage.getItem("GD1A Lower #1value") ) + '</p>'+"<br>" +'<h3>GD1A Twin Lower</h3><p>In Stock: ' + localStorage.getItem("GD1A Twin Lower") + ' ' + 'Balance: '+ (localStorage.getItem("GD1A Twin Lower") - localStorage.getItem("GD1A Twin Lowervalue") ) + '</p>'+"<br>" +'<h3>GD1A Sport Lower</h3><p>In Stock: ' + localStorage.getItem("GD1A Sport Lower") + ' ' + 'Balance: '+ (localStorage.getItem("GD1A Sport Lower") - localStorage.getItem("GD1A Sport Lowervalue") ) + '</p>',
-      isHTML: true
+      attachments: ['base64:StockCheck.pdf//' + b64],
+      body:    'Please see attached.'
 
   });
-})
+});
+var b64 = '';
+function createPDF() {
+  let options = {
+                  documentSize: 'A4',
+                  type: 'base64',
+                  fileName: 'StockCheck'
+                }
+
+  pdf.fromData( '<table style="width: 100%; text-align: center;"><tr><th>Part Name</th><th>Amount</th><th>Balance</th></tr><tr><td>083 Frt</td><td>' + localStorage.getItem("083 Front") + '</td><td class="083Front">' + (localStorage.getItem("083 Front") - localStorage.getItem("083 Frontvalue") ) + '</td></tr><tr><td>083 Low Grade Rear</td><td>' + localStorage.getItem("083 Low Grade Rear") + '</td><td>' + (localStorage.getItem("083 Low Grade Rear") - localStorage.getItem("083 Low Grade Rearvalue") ) + '</td></tr><tr><td>083 High Grade Rear</td><td>' + localStorage.getItem("083 High Grade Rear") + '</td><td>' + (localStorage.getItem("083 High Grade Rear") - localStorage.getItem("083 High Grade Rearvalue") ) + '</td></tr><tr><td>B12P Front</td><td>' + localStorage.getItem("B12P Front") + '</td><td>' + (localStorage.getItem("B12P Front") - localStorage.getItem("B12P Frontvalue") ) + '</td></tr><tr><td>B12P Rear</td><td>' + localStorage.getItem("B12P Rear") + '</td><td>' + (localStorage.getItem("B12P Rear") - localStorage.getItem("B12P Rearvalue") ) + '</td></tr><tr><td>724 Front Upper</td><td>' + localStorage.getItem("724 Front Upper") + '</td><td>' + (localStorage.getItem("724 Front Upper") - localStorage.getItem("724 Front Uppervalue") ) + '</td></tr><tr><td>724 Front Lower</td><td>' + localStorage.getItem("724 Front Lower") + '</td><td>' + (localStorage.getItem("724 Front Lower") - localStorage.getItem("724 Front Lowervalue") ) + '</td></tr><tr><td>724 Rear Upper</td><td>' + localStorage.getItem("724 Rear Upper") + '</td><td>' + (localStorage.getItem("724 Rear Upper") - localStorage.getItem("724 Rear Uppervalue") ) + '</td></tr><tr><td>724 Rear Lower</td><td>' + localStorage.getItem("724 Rear Lower") + '</td><td>' + (localStorage.getItem("724 Rear Lower") - localStorage.getItem("724 Rear Lowervalue") ) + '</td></tr><tr><td>Nismo Rear</td><td>' + localStorage.getItem("Nismo Rear") + '</td><td>' + (localStorage.getItem("Nismo Rear") - localStorage.getItem("Nismo Rearvalue") ) + '</td></tr><tr><td>GD1A GT Front</td><td>' + localStorage.getItem("GD1A GT Front") + '</td><td>' + (localStorage.getItem("GD1A GT Front") - localStorage.getItem("GD1A GT Frontvalue") ) + '</td></tr><tr><td>GD1A Sport Front</td><td>' + localStorage.getItem("GD1A Sport Front") + '</td><td>' + (localStorage.getItem("GD1A Sport Front") - localStorage.getItem("GD1A Sport Frontvalue") ) + '</td></tr><tr><td>GD1A All Road Front</td><td>' + localStorage.getItem("GD1A All Road Front") + '</td><td>' + (localStorage.getItem("GD1A All Road Front") - localStorage.getItem("GD1A All Road Frontvalue") ) + '</td></tr><tr><td>GD1A GT/Sport Rear Upper</td><td>' + localStorage.getItem("GD1A GT/Sport Rear Upper") + '</td><td>' + (localStorage.getItem("GD1A GT/Sport Rear Upper") - localStorage.getItem("GD1A GT/Sport Rear Uppervalue") ) + '</td></tr><tr><td>GD1A All Road Rear</td><td>' + localStorage.getItem("GD1A All Road Rear") + '</td><td>' + (localStorage.getItem("GD1A All Road Rear") - localStorage.getItem("GD1A All Road Rearvalue") ) + '</td></tr><tr><td>GD1A Lower #1</td><td>' + localStorage.getItem("GD1A Lower #1") + '</td><td>' + (localStorage.getItem("GD1A Lower #1") - localStorage.getItem("GD1A Lower #1value") ) + '</td></tr><tr><td>GD1A Twin Lower</td><td>' + localStorage.getItem("GD1A Twin Lower") + '</td><td>' + (localStorage.getItem("GD1A Twin Lower") - localStorage.getItem("GD1A Twin Lowervalue") ) + '</td></tr><tr><td>GD1A Sport Lower</td><td>' + localStorage.getItem("GD1A Sport Lower") + '</td><td>' + (localStorage.getItem("GD1A Sport Lower") - localStorage.getItem("GD1A Sport Lowervalue") ) + '</td></tr></table>', options)
+      .then((base64)=> b64 = base64)   // ok..., ok if it was able to handle the file to the OS.
+      .catch((err)=>console.err(err));
+}
 }

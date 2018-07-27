@@ -12,6 +12,9 @@
     },
     "cordova-plugin-email-composer": {
       "PACKAGE_NAME": "com.chrisbowman.stockcheck"
+    },
+    "cordova-pdf-generator": {
+      "PACKAGE_NAME": "com.chrisbowman.stockcheck"
     }
   },
   "dependent_plugins": {}

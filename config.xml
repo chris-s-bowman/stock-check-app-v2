@@ -29,5 +29,6 @@
         <allow-intent href="itms-apps:*" />
     </platform>
     <plugin name="cordova-plugin-email-composer" spec="^0.8.15" />
+    <plugin name="cordova-pdf-generator" spec="^2.0.4" />
     <engine name="android" spec="^7.0.0" />
 </widget>
